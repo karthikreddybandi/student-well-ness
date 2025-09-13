@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Wellness Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <header class="text-center mb-5">
+            <h1>Student Wellness and Mental Health Monitoring Platform</h1>
+            <p>Track your mood, get personalized recommendations, and visualize your wellness trends.</p>
+        </header>
+
+        <section id="checkin" class="mb-5">
+            <h2>Daily Mood Check-In</h2>
+            <form id="moodForm">
+                <div class="mb-3">
+                    <label for="moodText" class="form-label">How are you feeling today? (Describe your emotions)</label>
+                    <textarea class="form-control" id="moodText" rows="3" placeholder="e.g., I'm feeling stressed about exams but excited for the weekend."></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="moodLevel" class="form-label">Mood Level (1-10)</label>
+                    <input type="range" class="form-range" id="moodLevel" min="1" max="10" value="5">
+                    <div class="d-flex justify-content-between">
+                        <span>1 (Low)</span>
+                        <span id="moodValue">5</span>
+                        <span>10 (High)</span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Check-In</button>
+            </form>
+        </section>
+
+        <section id="dashboard" class="mb-5">
+            <h2>Wellness Trends Dashboard</h2>
+            <canvas id="moodChart"></canvas>
+        </section>
+
+        <section id="recommendations" class="mb-5">
+            <h2>Personalized Recommendations</h2>
+            <div id="recs" class="alert alert-info">
+                Submit a check-in to see recommendations.
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+</html>
